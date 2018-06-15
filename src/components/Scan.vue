@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{name: 'Home'}">Go Home</router-link>
+    <router-link :to="{name: 'Home'}">{{ $t('default.homeLink') }}</router-link>
     <Scanner @scan="onScan" />
   </div>
 </template>

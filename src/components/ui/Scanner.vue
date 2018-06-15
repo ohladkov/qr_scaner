@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Scan your code here:</h2>
+    <h2>{{ $t('scanner.msg') }}</h2>
     <video v-show="showVideo === true"
            ref="video"
            width="200"

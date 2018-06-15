@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <router-link :to="{ name: 'Scan' }">Go to Scanner</router-link>
+    <h1>{{ $t('default.title') }}</h1>
+    <router-link :to="{ name: 'Scan' }">{{ $t('scanner.link') }}</router-link>
   </div>
 </template>
 
@@ -10,7 +10,6 @@ export default {
   name: 'Home',
   data() {
     return {
-      msg: 'Welcome to Scanner Vue.js App',
     };
   },
 };

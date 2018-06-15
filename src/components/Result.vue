@@ -1,13 +1,13 @@
 <template>
   <div id="result">
-    <h2>Result:
+    <h2>{{ $t('result.result') }}
       <mark>
         {{getCode}}
       </mark>
     </h2>
     <button @click.prevent="reset"
             type="button"
-            class="btn-reset">reset</button>
+            class="btn-reset">{{ $t('default.resetBtn') }}</button>
   </div>
 </template>
 
