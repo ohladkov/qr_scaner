@@ -6,9 +6,10 @@ export default {
   result: {
     result: 'Результат сканирования:',
   },
+  form: {
+    submit: 'отправить',
+  },
   default: {
-    title: 'Добро пожаловать во Вью-Сканер!',
-    homeLink: 'Домой',
     resetBtn: 'Сброс',
   },
 };

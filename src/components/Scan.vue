@@ -1,6 +1,5 @@
 <template>
   <div>
-    <router-link :to="{name: 'Home'}">{{ $t('default.homeLink') }}</router-link>
     <Scanner @scan="onScan" />
   </div>
 </template>
@@ -19,7 +18,7 @@ export default {
   },
   methods: {
     onScan(result) {
-      this.$router.push({ name: 'Result' });
+      this.$router.push('/result');
       this.$store.dispatch('qr/setCode', result);
     },
   },

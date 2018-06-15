@@ -6,9 +6,10 @@ export default {
   result: {
     result: 'Scan-Ergebnis:',
   },
+  form: {
+    submit: 'einsenden',
+  },
   default: {
-    title: 'Willkommen bei Vue QR-Scanner App!',
-    homeLink: 'Back Home',
     resetBtn: 'rücksetzen',
   },
 };
