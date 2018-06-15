@@ -19,7 +19,8 @@ export default {
   },
   methods: {
     onScan(result) {
-      this.$router.push({ name: 'Result', query: { data: result } });
+      this.$router.push({ name: 'Result' });
+      this.$store.dispatch('qr/setCode', result);
     },
   },
 };

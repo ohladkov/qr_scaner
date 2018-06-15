@@ -2,7 +2,7 @@
   <div id="result">
     <h2>Result:
       <mark>
-        {{result}}
+        {{getCode}}
       </mark>
     </h2>
     <button @click.prevent="reset"
@@ -16,20 +16,22 @@ export default {
   name: 'Result',
   data() {
     return {
-      result: '',
     };
   },
   created() {
-    const queryData = this.$route.query.data;
-    if (queryData) {
-      this.result = queryData;
-      return;
+    if (!this.getCode) {
+      this.reset();
     }
-    this.reset();
   },
   methods: {
     reset() {
+      this.$store.dispatch('qr/resetCode');
       this.$router.push('/scan');
+    },
+  },
+  computed: {
+    getCode() {
+      return this.$store.state.qr.code;
     },
   },
 };
