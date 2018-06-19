@@ -1,32 +1,32 @@
 import axios from 'axios';
+import storage from './storage';
+
+const SET_IS_LOGGED_IN_MUTATION = 'setIsLoggedIn';
+const IS_LOGGED_IN = 'isLoggedIn';
 
 export default {
   namespaced: true,
   state: {
-    isLoggedIn: false,
+    [IS_LOGGED_IN]: false,
   },
   mutations: {
-    setIsLoggedIn(state) {
-      state.isLoggedIn = true;
-      localStorage.setItem('isLoggedIn', true);
+    [SET_IS_LOGGED_IN_MUTATION](state) {
+      state[IS_LOGGED_IN] = true;
+      storage.setItem(IS_LOGGED_IN, true);
     },
   },
   actions: {
-    login(context, formData) {
-      const url = 'https://mock-now-server-ojjpfycdme.now.sh/login';
-
-      return axios.post(url, formData).then((response) => {
+    login({ commit }, formData) {
+      return axios.post(process.env.AUTH_URL, formData).then((response) => {
         if (response.data.success) {
-          context.commit('setIsLoggedIn');
+          return commit(SET_IS_LOGGED_IN_MUTATION);
         }
 
-        return response.data.success;
-      }).catch((e) => {
-        throw new Error(e);
+        throw new Error('Invalid Credentials!');
       });
     },
   },
   getters: {
-    isLoggedIn: state => state.isLoggedIn || localStorage.getItem('isLoggedIn'),
+    [IS_LOGGED_IN]: state => state[IS_LOGGED_IN] || storage.getItem(IS_LOGGED_IN),
   },
 };

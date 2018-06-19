@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Scanner @scan="onScan" />
+    <Scanner @scan="onScan" @throwError="errorHandler" />
   </div>
 </template>
 
@@ -18,8 +18,11 @@ export default {
   },
   methods: {
     onScan(result) {
-      this.$router.push('/result');
+      this.$router.push({ name: 'Result' });
       this.$store.dispatch('qr/setCode', result);
+    },
+    errorHandler(error) {
+      throw new Error(error);
     },
   },
 };

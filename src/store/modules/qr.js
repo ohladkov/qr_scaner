@@ -1,19 +1,21 @@
+const SET_CODE_MUTATION = 'setCode';
+
 export default {
   namespaced: true,
   state: {
     code: '',
   },
   mutations: {
-    setCode(state, code) {
+    [SET_CODE_MUTATION](state, code) {
       state.code = code;
     },
   },
   actions: {
-    setCode(context, val) {
-      context.commit('setCode', val);
+    setCode({ commit }, val) {
+      commit(SET_CODE_MUTATION, val);
     },
-    resetCode(context) {
-      context.commit('setCode', '');
+    resetCode({ commit }) {
+      commit(SET_CODE_MUTATION, '');
     },
   },
 };

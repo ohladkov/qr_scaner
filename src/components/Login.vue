@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="form-wrapper">
-      <form action="#" id="form" @submit.prevent="checkLogin">
+      <form action="#" id="form" @submit.prevent="checkAuth">
         <div class="form-row">
           <input class="form-input"
                  type="text"
@@ -36,21 +36,17 @@ export default {
     };
   },
   methods: {
-    checkLogin() {
+    checkAuth() {
       const formData = {
         login: this.login,
         password: this.password,
       };
 
-      this.$store.dispatch('auth/login', formData).then((response) => {
-        if (!response) {
-          // eslint-disable-next-line
-          alert('Login or password are invalid');
-          return;
-        }
-        this.$router.push('/scan');
+      this.$store.dispatch('auth/login', formData).then(() => {
+        this.$router.push({ name: 'Scan' });
       }).catch((e) => {
-        throw new Error(e);
+        // eslint-disable-next-line
+        alert(e);
       });
     },
   },

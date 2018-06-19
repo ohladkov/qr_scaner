@@ -8,6 +8,8 @@ export default {
   },
   form: {
     submit: 'отправить',
+    login: 'Логин',
+    password: 'Пароль',
   },
   default: {
     resetBtn: 'Сброс',

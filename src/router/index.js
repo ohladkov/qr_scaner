@@ -20,7 +20,7 @@ const router = new Router({
       component: Scan,
       alias: '/',
       meta: {
-        isUser: true,
+        authRequired: true,
       },
     },
     {
@@ -28,7 +28,7 @@ const router = new Router({
       name: 'Result',
       component: Result,
       meta: {
-        isUser: true,
+        authRequired: true,
       },
     },
     {
@@ -36,7 +36,7 @@ const router = new Router({
       name: 'Login',
       component: Login,
       meta: {
-        isUser: false,
+        authRequired: false,
       },
     },
   ],
@@ -45,12 +45,12 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const isAuthorized = store.getters['auth/isLoggedIn'];
 
-  if (to.meta.isUser && !isAuthorized) {
-    return next('/login');
+  if (to.meta.authRequired && !isAuthorized) {
+    return next({ name: 'Login' });
   }
 
-  if (!to.meta.isUser && isAuthorized) {
-    return next('/');
+  if (!to.meta.authRequired && isAuthorized) {
+    return next({ name: 'Scan' });
   }
 
   return next();

@@ -26,7 +26,7 @@ export default {
   methods: {
     reset() {
       this.$store.dispatch('qr/resetCode');
-      this.$router.push('/scan');
+      this.$router.push({ name: 'Scan' });
     },
   },
   computed: {

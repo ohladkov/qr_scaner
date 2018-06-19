@@ -1,11 +1,10 @@
 <template>
   <div>
     <h2>{{ $t('scanner.msg') }}</h2>
-    <video v-show="showVideo === true"
-           ref="video"
-           width="200"
-           height="160"
-           id="video"></video>
+    <video v-show="showVideo"
+           :width="width"
+           :height="height"
+           ref="video"></video>
   </div>
 </template>
 
@@ -14,6 +13,16 @@ const Instascan = require('instascan');
 
 export default {
   name: 'Scanner',
+  props: {
+    width: {
+      type: Number,
+      default: 200,
+    },
+    height: {
+      type: Number,
+      default: 160,
+    },
+  },
   data() {
     return {
       showVideo: true,
@@ -30,12 +39,11 @@ export default {
           if (cameras.length > 0) {
             scanner.start(cameras[0]);
           } else {
-            // eslint-disable-next-line
-            console.error('No cameras found.');
+            this.$emit('throwError', 'No cameras found');
           }
         })
         .catch((e) => {
-          throw new Error(e);
+          this.$emit('throwError', e);
         });
     },
   },
