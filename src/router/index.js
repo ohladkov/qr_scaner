@@ -10,11 +10,6 @@ Vue.use(Router);
 const router = new Router({
   routes: [
     {
-      path: '*',
-      component: Login,
-      redirect: '/',
-    },
-    {
       path: '/scan',
       name: 'Scan',
       component: Scan,
@@ -39,18 +34,26 @@ const router = new Router({
         authRequired: false,
       },
     },
+    {
+      path: '*',
+      redirect: '/',
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthorized = store.getters['auth/isLoggedIn'];
-
-  if (to.meta.authRequired && !isAuthorized) {
-    return next({ name: 'Login' });
+  if (typeof to.meta.authRequired === 'undefined') {
+    return next();
   }
+
+  const isAuthorized = store.getters['storage/isLoggedIn'];
 
   if (!to.meta.authRequired && isAuthorized) {
     return next({ name: 'Scan' });
+  }
+
+  if (to.meta.authRequired && !isAuthorized) {
+    return next({ name: 'Login' });
   }
 
   return next();

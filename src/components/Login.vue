@@ -42,11 +42,11 @@ export default {
         password: this.password,
       };
 
-      this.$store.dispatch('auth/login', formData).then(() => {
+      return this.$store.dispatch('auth/login', formData).then(() => {
         this.$router.push({ name: 'Scan' });
-      }).catch((e) => {
+      }).catch(() => {
         // eslint-disable-next-line
-        alert(e);
+        alert(this.$t('form.invalidCredentials'));
       });
     },
   },

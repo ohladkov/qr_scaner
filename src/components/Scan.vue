@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Scanner @scan="onScan" @throwError="errorHandler" />
+    <Scanner @scan="onScan" @error="onError" />
   </div>
 </template>
 
@@ -21,7 +21,9 @@ export default {
       this.$router.push({ name: 'Result' });
       this.$store.dispatch('qr/setCode', result);
     },
-    errorHandler(error) {
+    onError(error) {
+      // eslint-disable-next-line
+      alert(error);
       throw new Error(error);
     },
   },

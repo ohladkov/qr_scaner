@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ $t('scanner.msg') }}</h2>
-    <video v-show="showVideo"
+    <video v-show="isVideoVisible"
            :width="width"
            :height="height"
            ref="video"></video>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      showVideo: true,
+      isVideoVisible: true,
     };
   },
   methods: {
@@ -39,11 +39,12 @@ export default {
           if (cameras.length > 0) {
             scanner.start(cameras[0]);
           } else {
-            this.$emit('throwError', 'No cameras found');
+            // eslint-disable-next-line
+            alert(this.$t('scanner.noCamera'));
           }
         })
-        .catch((e) => {
-          this.$emit('throwError', e);
+        .catch(() => {
+          this.$emit('error', new Error(this.$t('scanner.failedCamera')));
         });
     },
   },
